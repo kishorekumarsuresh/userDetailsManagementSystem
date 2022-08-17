@@ -14,6 +14,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import PageNum from "./PageNum";
 import AttachEmailRoundedIcon from "@mui/icons-material/AttachEmailRounded";
+import VerifiedIcon from "@mui/icons-material/Verified";
+import UnpublishedIcon from "@mui/icons-material/Unpublished";
 
 class NewShow extends React.Component {
   constructor(props) {
@@ -22,7 +24,7 @@ class NewShow extends React.Component {
       page: 1,
     };
   }
-  
+
   deletehandler = (id) => {
     axios
       .delete(`https://gorest.co.in/public/v2/users/${id}`, {
@@ -44,16 +46,12 @@ class NewShow extends React.Component {
     this.setState({ page: arg });
   };
 
-  
-
-
   render() {
-    
     const { output, setOutput } = this.props;
 
     const usersPerPage = 2;
     const pagesCount = Math.ceil(output.length / usersPerPage);
-    const lastIndex = this.state.page * usersPerPage ;
+    const lastIndex = this.state.page * usersPerPage;
     const firstIndex = lastIndex - usersPerPage;
     const poutput = output.slice(firstIndex, lastIndex);
 
@@ -96,8 +94,16 @@ class NewShow extends React.Component {
                 </Link>
 
                 <CardContent>
-                  <Typography>{post.name}</Typography>
-                  <AttachEmailRoundedIcon />
+                  <Typography>
+                    {post.name}
+                    {post.status === "active" ? (
+                      <VerifiedIcon color="success" sx={{height:25,mt:2}}/>
+                    ) : (
+                      <UnpublishedIcon color="action" />
+                    )}
+                  </Typography>
+
+                  <AttachEmailRoundedIcon sx={{margin:'auto'}}/>
                   <Typography>{post.email}</Typography>
                 </CardContent>
 
