@@ -22,7 +22,7 @@ class NewShow extends React.Component {
       page: 1,
     };
   }
-
+  
   deletehandler = (id) => {
     axios
       .delete(`https://gorest.co.in/public/v2/users/${id}`, {
@@ -32,6 +32,7 @@ class NewShow extends React.Component {
         },
       })
       .then((response) => {
+        //this.props.setOutput(response.data)
         console.log("passed", response.data);
       })
       .catch((errr) => {
@@ -43,13 +44,11 @@ class NewShow extends React.Component {
     this.setState({ page: arg });
   };
 
-  // changeOutput = (arg)=>{
-  //     setOutput(arg)
-  // }
+  
 
 
   render() {
-    //const nav = useNavigate()
+    
     const { output, setOutput } = this.props;
 
     const usersPerPage = 2;
@@ -68,7 +67,7 @@ class NewShow extends React.Component {
             alignItem: "center",
           }}
         >
-          {poutput.map((post) => (
+          {output.map((post) => (
             <Box display="flex" justifyContent="center" alignItems="start">
               <Card
                 sx={{

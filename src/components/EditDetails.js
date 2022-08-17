@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { Button, FormControl, FormLabel, TextField } from "@mui/material";
+import { Button, FormControl, FormLabel, Snackbar, TextField } from "@mui/material";
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -13,6 +13,7 @@ function EditDetails() {
   const [uname, setUname] = useState("");
   const [umail, setUmail] = useState("");
   const [ugender, setUgender] = useState("")
+  const [open,setOpen] = useState(false)
 
   useEffect(() => {
     axios
@@ -54,8 +55,15 @@ function EditDetails() {
       .catch((errr) => {
         console.log(errr);
       });
+      setOpen(true)
+    
+  }
+
+  function handleClose() {
+    setOpen(false)
     nav("/");
   }
+
 
   const nav = useNavigate();
 
@@ -109,6 +117,12 @@ function EditDetails() {
         >
           Submit
         </Button>
+        <Snackbar
+            open={open}
+            autoHideDuration={2000}
+            message="Data Edited"
+            onClose={handleClose}
+          />
       </FormControl>
     </div>
   );
