@@ -27,7 +27,7 @@ function UserDetails() {
   const { name, email, gender, status } = userData;
 
   return (
-    <div>
+    <div className="divfortext">
       UserDetails
       <Card
         sx={{
@@ -39,7 +39,7 @@ function UserDetails() {
         }}
       >
         <CardContent>
-          <div className="div1">
+          <div styles={{textAlign:'initial'}}>
             <p>Name:{name}</p>
             <p>email:{email}</p>
             <p>gender:{gender}</p>

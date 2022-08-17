@@ -18,10 +18,6 @@ class Create extends Component {
       gender: "",
       status: "active",
       open: false,
-      valdity: {
-        name: "",
-        email: ""
-      }
 
     }
   }
@@ -86,7 +82,7 @@ class Create extends Component {
             value={this.state.name}
             onChange={this.changeValue}
             variant='outlined' />
-          <p style={{ color: 'red' }}>{this.state.valdity.name}</p>
+
           <Typography sx={{ mr: 55, mb: 1, mt: 1 }} variant='body1'>Email-id</Typography>
           <TextField label='Enter your email-id'
             color='success'

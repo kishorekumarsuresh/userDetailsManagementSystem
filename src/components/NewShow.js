@@ -23,14 +23,6 @@ class NewShow extends React.Component {
     };
   }
 
-  changeHandler = (arg) => {
-    this.setState({ page: arg });
-  };
-
-  // changeOutput = (arg)=>{
-  //     setOutput(arg)
-  // }
-
   deletehandler = (id) => {
     axios
       .delete(`https://gorest.co.in/public/v2/users/${id}`, {
@@ -47,13 +39,22 @@ class NewShow extends React.Component {
       });
   };
 
+  changeHandler = (arg) => {
+    this.setState({ page: arg });
+  };
+
+  // changeOutput = (arg)=>{
+  //     setOutput(arg)
+  // }
+
+
   render() {
     //const nav = useNavigate()
     const { output, setOutput } = this.props;
 
-    const usersPerPage = 4;
+    const usersPerPage = 2;
     const pagesCount = Math.ceil(output.length / usersPerPage);
-    const lastIndex = this.state.page * usersPerPage + 1;
+    const lastIndex = this.state.page * usersPerPage ;
     const firstIndex = lastIndex - usersPerPage;
     const poutput = output.slice(firstIndex, lastIndex);
 

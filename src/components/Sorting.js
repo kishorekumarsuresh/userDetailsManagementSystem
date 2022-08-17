@@ -1,21 +1,38 @@
-import React, { useState } from "react";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
+import React ,{useEffect, useState} from 'react';
+import { MenuItem,FormControl,InputLabel,Select } from "@mui/material";
 
-function Sorting(props) {
-  const [asecend, setAscend] = useState(false);
-  const datas = props.users;
+function Sorting({users,setOutput}) {
 
-  let Ascending = (st) => {
-    if (st) {
-      console.log(true);
-    } else {
-      console.log(false);
+  const [sort,setSort] = useState("")
+
+  
+  
+    useEffect(()=>{
+      sarting()
+    },[sort])
+
+    function sarting(){
+      sort=='Z-A'? setOutput([...users.sort((a,b)=>(a.name>b.name)? -1 : 1 )]) :
+      setOutput([...users.sort((a,b)=>(a.name<b.name)? -1 : 1 )])
     }
-  };
 
-  return <div></div>;
+    
+
+  return (
+    <div>
+      <FormControl>
+      <InputLabel id="select-label">SortBy</InputLabel>
+      <Select
+      value={sort}
+      onChange={(e)=>{setSort(e.target.value)}}>
+
+        <MenuItem value="A-Z">sort A-Z</MenuItem>
+        <MenuItem value="Z-A">sort Z-A</MenuItem>
+
+      </Select>
+      </FormControl>
+    </div>
+  )
 }
 
-export default Sorting;
+export default Sorting

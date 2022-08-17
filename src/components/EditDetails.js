@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { Button, FormControl, FormLabel, TextField } from "@mui/material";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import { func } from "prop-types";
 
 function EditDetails() {
@@ -9,6 +12,7 @@ function EditDetails() {
   const [userData, setUserData] = useState({});
   const [uname, setUname] = useState("");
   const [umail, setUmail] = useState("");
+  const [ugender, setUgender] = useState("")
 
   useEffect(() => {
     axios
@@ -32,7 +36,8 @@ function EditDetails() {
   useEffect(() => {
     setUname(name);
     setUmail(email);
-  }, [name, email]);
+    setUgender(gender)
+  }, [name, email,gender]);
 
   function display() {
     axios({
@@ -80,7 +85,22 @@ function EditDetails() {
           >
             email:
           </TextField>
+        
         </FormLabel>
+        <FormLabel>
+          Select a gender :
+        <RadioGroup
+            row
+            onChange={(e)=>{setUgender(e.target.value)}}
+            value={ugender}
+            name="gender"
+          >
+            <FormControlLabel value="female" control={<Radio />} label="Male" />
+            <FormControlLabel value="male" control={<Radio />} label="Female" />
+            <FormControlLabel value="other" control={<Radio />} label="Other" />
+
+          </RadioGroup>
+          </FormLabel>
         <Button
           sx={{ mt: 1 }}
           variant="contained"

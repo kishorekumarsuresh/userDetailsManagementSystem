@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import NewShow from "./NewShow";
 import { Button, TextField } from "@mui/material";
+import Sorting from "./Sorting";
+import Filter from "./Filter";
 
 function NewHome() {
   const [users, setUsers] = useState([]);
@@ -56,9 +58,14 @@ function NewHome() {
       />
 
       <br />
-
+      <div style={{display:'flex',flexDirection:'row'}}>
+      <Sorting users={users} setOutput={setOutput}/>
+      <Filter users={users} setOutput={setOutput}/>
+      </div>
+      
       <NewShow output={output} setOutput={setOutput} />
-      {/* <Pagination output={output}/> */}
+      
+      
     </div>
   );
 }
