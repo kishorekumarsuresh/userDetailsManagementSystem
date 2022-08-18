@@ -4,6 +4,7 @@ import NewShow from "./NewShow";
 import { Button, TextField } from "@mui/material";
 import Sorting from "./Sorting";
 import Filter from "./Filter";
+//import GoogleAuth from "./GoogleAuth";
 
 function NewHome() {
   const [users, setUsers] = useState([]);
@@ -46,7 +47,7 @@ function NewHome() {
   return (
     <div>
       <br />
-
+      
       <TextField
         sx={{ width: 400, mb: 2 }}
         label="Search by name "
@@ -58,7 +59,7 @@ function NewHome() {
       />
 
       <br />
-      <div style={{display:'flex',flexDirection:'row'}}>
+      <div style={{display:'flex',flexDirection:'row',justifyContent:'space-evenly',marginBottom:5,margin:20}}>
       <Sorting users={users} setOutput={setOutput}/>
       <Filter users={users} setOutput={setOutput}/>
       </div>

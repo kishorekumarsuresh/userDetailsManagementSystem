@@ -5,6 +5,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import FolderCopyIcon from "@mui/icons-material/FolderCopy";
+import GoogleAuth from "./GoogleAuth";
 
 class Header extends React.Component {
   constructor(props) {
@@ -46,13 +47,9 @@ class Header extends React.Component {
               The site for getting user's information...
             </Typography>
 
-            <Button
-              onClick={this.handleToggle}
-              color="success"
-              variant="contained"
-            >
-              {this.state.log ? "Login" : "Logout"}
-            </Button>
+            
+            <GoogleAuth />
+            
           </Toolbar>
         </AppBar>
       </Box>

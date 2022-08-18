@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { Button, CardActions, CardContent, Card } from "@mui/material";
+import { Button, CardActions, CardContent, Card ,Box} from "@mui/material";
 import "./Style.css";
 function UserDetails() {
   const { id } = useParams();
@@ -31,17 +31,20 @@ function UserDetails() {
       UserDetails
       <Card
         sx={{
-          width: 700,
-          height: 285,
-          ml: 35,
+          width: 500,
+          height: 255,
+          ml: 50,
           mt: 2,
           backgroundColor: "blanchedalmond",
         }}
       >
-        <CardContent>
+        <CardContent sx={{display:'grid',justifyContent:'center'}}>
           <div styles={{textAlign:'initial'}}>
             <p>Name:{name}</p>
+            <Box sx={{ml:12}}>
             <p>email:{email}</p>
+            </Box>
+            
             <p>gender:{gender}</p>
             <p>status:{status}</p>
           </div>

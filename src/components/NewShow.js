@@ -11,6 +11,7 @@ import React from "react";
 import Avatar from "@mui/material/Avatar";
 import { deepOrange, deepPurple, teal } from "@mui/material/colors";
 import { Link, useNavigate } from "react-router-dom";
+import DescriptionIcon from '@mui/icons-material/Description';
 import axios from "axios";
 import PageNum from "./PageNum";
 import AttachEmailRoundedIcon from "@mui/icons-material/AttachEmailRounded";
@@ -34,7 +35,6 @@ class NewShow extends React.Component {
         },
       })
       .then((response) => {
-        //this.props.setOutput(response.data)
         console.log("passed", response.data);
       })
       .catch((errr) => {
@@ -65,7 +65,9 @@ class NewShow extends React.Component {
             alignItem: "center",
           }}
         >
-          {output.map((post) => (
+          { output[0] ?
+
+          (poutput.map((post) => (
             <Box display="flex" justifyContent="center" alignItems="start">
               <Card
                 sx={{
@@ -93,11 +95,11 @@ class NewShow extends React.Component {
                   </CardMedia>
                 </Link>
 
-                <CardContent>
+                <CardContent >
                   <Typography>
                     {post.name}
                     {post.status === "active" ? (
-                      <VerifiedIcon color="success" sx={{height:25,mt:2}}/>
+                      <VerifiedIcon color="success" />
                     ) : (
                       <UnpublishedIcon color="action" />
                     )}
@@ -107,7 +109,7 @@ class NewShow extends React.Component {
                   <Typography>{post.email}</Typography>
                 </CardContent>
 
-                <CardActions>
+                <CardActions sx={{display:'flex',justifyContent:'center',alignItems:'center'}}>
                   <Button variant="outlined" size="small" color="primary">
                     <Link to={`editdetails/${post.id}`}>edit</Link>
                   </Button>
@@ -124,9 +126,12 @@ class NewShow extends React.Component {
                 </CardActions>
               </Card>
             </Box>
-          ))}
+          ))):
+          
+          <Typography sx={{ml:35,height:140,}}> <DescriptionIcon color="primary" sx={{height:30,width:40}}/>  No results found...</Typography>
+        }
         </div>
-
+        
         <PageNum count={pagesCount} changeHandler={this.changeHandler} />
       </div>
     );

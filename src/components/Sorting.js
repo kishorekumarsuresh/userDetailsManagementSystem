@@ -20,7 +20,7 @@ function Sorting({users,setOutput}) {
 
   return (
     <div>
-      <FormControl>
+      <FormControl sx={{width:110}}>
       <InputLabel id="select-label">SortBy</InputLabel>
       <Select
       value={sort}
