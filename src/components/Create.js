@@ -17,11 +17,10 @@ class Create extends Component {
       email: "",
       gender: "",
       status: "active",
-      open: false,
-
+      open: false
     }
   }
-  changeValue = (e) => {
+   changeValue = (e) => {
 
     this.setState({ [e.target.name]: e.target.value })
   }
@@ -35,13 +34,11 @@ class Create extends Component {
       url: 'https://gorest.co.in/public/v2/users',
       data: this.state,
       headers: {
-        "Authorization": "Bearer bf0f401f79f16bfff0c3dd99cc7d2395f41b613717f92226522562487ceff6bf"
+        "Authorization": "Bearer 0ee057fd533ccad974e9383af8209a2e3db05bf7db963840f9c9b68f2c09f4f2"
       },
 
     }).then((result) => {
-      result.json().then((resp) => {
-        console.log('response')
-      })
+      console.log(result.data)
     }).catch(res => {
       console.log('failed')
     })
@@ -57,6 +54,7 @@ class Create extends Component {
       gender: "",
       open: true,
       status: "active",
+      
 
     })
   }

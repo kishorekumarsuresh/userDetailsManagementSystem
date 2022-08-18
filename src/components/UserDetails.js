@@ -13,7 +13,7 @@ function UserDetails() {
         headers: {
           Authorization:
             "Bearer " +
-            "bf0f401f79f16bfff0c3dd99cc7d2395f41b613717f92226522562487ceff6bf",
+            "0ee057fd533ccad974e9383af8209a2e3db05bf7db963840f9c9b68f2c09f4f2",
         },
       })
       .then((response) => {
@@ -25,6 +25,7 @@ function UserDetails() {
   }, [id]);
 
   const { name, email, gender, status } = userData;
+
 
   return (
     <div className="divfortext">
@@ -38,7 +39,7 @@ function UserDetails() {
           backgroundColor: "blanchedalmond",
         }}
       >
-        <CardContent sx={{display:'grid',justifyContent:'center'}}>
+        <CardContent sx={{display:'flex',justifyContent:'start'}}>
           <div styles={{textAlign:'initial'}}>
             <p>Name:{name}</p>
             <Box sx={{ml:12}}>

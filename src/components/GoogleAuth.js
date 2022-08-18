@@ -26,6 +26,7 @@ function GoogleAuth() {
   return (
     <Box sx={{display:'flex',flexDirection:'row',justifyContent:'space-between',marginRight:0,}}>
       <Login />
+      <p> </p>
       <Logout />
     </Box>
   )

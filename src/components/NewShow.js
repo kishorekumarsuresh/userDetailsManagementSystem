@@ -17,7 +17,7 @@ import PageNum from "./PageNum";
 import AttachEmailRoundedIcon from "@mui/icons-material/AttachEmailRounded";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import UnpublishedIcon from "@mui/icons-material/Unpublished";
-import  { withRouter } from 'react-router-dom'
+//import  { withRouter } from 'react-router-dom'
 
 class NewShow extends React.Component {
   constructor(props) {
@@ -41,7 +41,7 @@ class NewShow extends React.Component {
       .catch((errr) => {
         console.log("failed to delete");
       });
-      this.props.history.push("/");
+      //this.props.history.push("/");
   };
 
   // changeHandler = (arg) => {
@@ -98,7 +98,7 @@ class NewShow extends React.Component {
                 </Link>
 
                 <CardContent >
-                  <div>
+                  <div style={{display:"flex",justifyContent:'center' ,alignItem:'center'}}>
                   <Typography>
                     {post.name}
                   </Typography>
@@ -142,4 +142,5 @@ class NewShow extends React.Component {
     );
   }
 }
-export default withRouter(NewShow);
+//export default withRouter(NewShow);
+export default NewShow

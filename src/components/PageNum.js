@@ -2,9 +2,9 @@ import React from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
-function PageNum({ count, changeHandler }) {
+function PageNum({ count, changePageHandler }) {
   const handleChange = (e, value) => {
-    changeHandler(value);
+    changePageHandler(value);
   };
 
   return (

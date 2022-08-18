@@ -5,13 +5,14 @@ import { Button, FormControl, FormLabel, Snackbar, TextField } from "@mui/materi
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { func } from "prop-types";
+
 
 function EditDetails() {
   const { id } = useParams();
   const [userData, setUserData] = useState({});
   const [uname, setUname] = useState("");
   const [umail, setUmail] = useState("");
+  const [active,setActive] = useState ("active")
   const [ugender, setUgender] = useState("")
   const [open,setOpen] = useState(false)
 
@@ -21,7 +22,7 @@ function EditDetails() {
         headers: {
           Authorization:
             "Bearer " +
-            "bf0f401f79f16bfff0c3dd99cc7d2395f41b613717f92226522562487ceff6bf",
+            "0ee057fd533ccad974e9383af8209a2e3db05bf7db963840f9c9b68f2c09f4f2",
         },
       })
       .then((response) => {
@@ -30,7 +31,7 @@ function EditDetails() {
       .catch((err) => {
         console.log(err);
       });
-  }, [id]);
+  }, [id]); 
 
   const { name, email, gender, status } = userData;
 
@@ -38,24 +39,49 @@ function EditDetails() {
     setUname(name);
     setUmail(email);
     setUgender(gender)
-  }, [name, email,gender]);
+  }, [name, email, gender]);
 
-  function display() {
-    axios({
-      method: "PATCH",
-      data: { name: { uname }, mail: { umail } },
+  function editHandler() {
+    const data = {
+      'name': uname,
+      'email': umail,
+      'status' : 'active'
+    }
+    axios.patch(`https://gorest.co.in/public/v2/users/${id}`,
+   data,
+    {
       headers: {
-        Authorization:
-          "Bearer bf0f401f79f16bfff0c3dd99cc7d2395f41b613717f92226522562487ceff6bf",
-      },
+                Authorization:
+                              "Bearer 0ee057fd533ccad974e9383af8209a2e3db05bf7db963840f9c9b68f2c09f4f2",
+              },
     })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((errr) => {
-        console.log(errr);
-      });
-      setOpen(true)
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((errr) => {
+      console.log(errr);
+    });
+    setOpen(true)
+
+
+    // axios({
+    //   url:`https://gorest.co.in/public/v2/users/${id}`,
+    //   method: "PUT",
+    //   //data: {},
+    //   //data: { name: { uname }, mail: { umail } ,status:"active"},
+    //   headers: {
+    //     Authorization:
+    //       "Bearer 0ee057fd533ccad974e9383af8209a2e3db05bf7db963840f9c9b68f2c09f4f2",
+    //   },
+    //   params :{ data:{uname,umail,active}}
+    // })
+    //   .then((response) => {
+    //     console.log(response.data);
+    //   })
+    //   .catch((errr) => {
+    //     console.log(errr);
+    //   });
+    //   setOpen(true)
     
   }
 
@@ -103,8 +129,8 @@ function EditDetails() {
             value={ugender}
             name="gender"
           >
-            <FormControlLabel value="female" control={<Radio />} label="Male" />
-            <FormControlLabel value="male" control={<Radio />} label="Female" />
+            <FormControlLabel value="male" control={<Radio />} label="Male" />
+            <FormControlLabel value="female" control={<Radio />} label="Female" />
             <FormControlLabel value="other" control={<Radio />} label="Other" />
 
           </RadioGroup>
@@ -113,7 +139,7 @@ function EditDetails() {
           sx={{ mt: 1 }}
           variant="contained"
           color="success"
-          onClick={display}
+          onClick={editHandler}
         >
           Submit
         </Button>
