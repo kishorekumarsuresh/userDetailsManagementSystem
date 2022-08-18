@@ -11,10 +11,10 @@ function NewHome() {
   const [users, setUsers] = useState([]);
   const [output, setOutput] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [pag,setPag] = useState(1)
+  //const [pag,setPag] = useState(1)
   const [page,setPage] = useState(1)
   const [pagesCount ,setPagesCount] = useState(10)
-  
+
   useEffect(() => {
     axios
       .get("https://gorest.co.in/public/v2/users", {
@@ -22,7 +22,7 @@ function NewHome() {
           Authorizaton:
             "Bearer 0ee057fd533ccad974e9383af8209a2e3db05bf7db963840f9c9b68f2c09f4f2",
         },
-        params: { page: 10 },
+        params: { page: page },
       })
       .then((response) => {
         setUsers(response.data);
@@ -32,18 +32,18 @@ function NewHome() {
       .catch((err) => {
         console.log(err);
       });
-  }, [pag]);
+  }, [page]);
 
   function handleChange(e) {
     setSearchTerm(e.target.value);
   }
 
-  const changePageHandler = (arg) => {
-    setPag(arg)
-  }
-  // const handlePage = () =>{
-  //     setPag(pag+1)
+  // const changePageHandler = (arg) => {
+  //   setPag(arg)
   // }
+  const handlePage = (arg) =>{
+      setPage(arg)
+  }
 
   useEffect(() => {
     setOutput([
@@ -78,8 +78,8 @@ function NewHome() {
       </div>
       
       <NewShow output={output} setOutput={setOutput} />
-      
-      <PageNum count={pagesCount} changeHandler={changePageHandler} />
+      <PageNum count={pagesCount} changeHandler={handlePage} />
+      {/* <PageNum count={pagesCount} changeHandler={changePageHandler} /> */}
     </div>
   );
 }
