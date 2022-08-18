@@ -17,13 +17,14 @@ import PageNum from "./PageNum";
 import AttachEmailRoundedIcon from "@mui/icons-material/AttachEmailRounded";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import UnpublishedIcon from "@mui/icons-material/Unpublished";
+import  { withRouter } from 'react-router-dom'
 
 class NewShow extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      page: 1,
-    };
+    // this.state = {
+    //   page: 1,
+    // };
   }
 
   deletehandler = (id) => {
@@ -31,7 +32,7 @@ class NewShow extends React.Component {
       .delete(`https://gorest.co.in/public/v2/users/${id}`, {
         headers: {
           Authorization:
-            "Bearer bf0f401f79f16bfff0c3dd99cc7d2395f41b613717f92226522562487ceff6bf",
+            "Bearer 0ee057fd533ccad974e9383af8209a2e3db05bf7db963840f9c9b68f2c09f4f2",
         },
       })
       .then((response) => {
@@ -40,20 +41,21 @@ class NewShow extends React.Component {
       .catch((errr) => {
         console.log("failed to delete");
       });
+      this.props.history.push("/");
   };
 
-  changeHandler = (arg) => {
-    this.setState({ page: arg });
-  };
+  // changeHandler = (arg) => {
+  //   this.setState({ page: arg });
+  // };
 
   render() {
     const { output, setOutput } = this.props;
 
-    const usersPerPage = 2;
-    const pagesCount = Math.ceil(output.length / usersPerPage);
-    const lastIndex = this.state.page * usersPerPage;
-    const firstIndex = lastIndex - usersPerPage;
-    const poutput = output.slice(firstIndex, lastIndex);
+    // const usersPerPage = 2;
+    // const pagesCount = Math.ceil(output.length / usersPerPage);
+    // const lastIndex = this.state.page * usersPerPage;
+    // const firstIndex = lastIndex - usersPerPage;
+    // const poutput = output.slice(firstIndex, lastIndex);
 
     return (
       <div>
@@ -67,8 +69,8 @@ class NewShow extends React.Component {
         >
           { output[0] ?
 
-          (poutput.map((post) => (
-            <Box display="flex" justifyContent="center" alignItems="start">
+          (output.map((post) => (
+            <Box display="flex" justifyContent="center" alignItems="start" key={post.id}>
               <Card
                 sx={{
                   mr: 2,
@@ -96,14 +98,17 @@ class NewShow extends React.Component {
                 </Link>
 
                 <CardContent >
+                  <div>
                   <Typography>
                     {post.name}
-                    {post.status === "active" ? (
+                  </Typography>
+                  {
+                  post.status === "active" ? (
                       <VerifiedIcon color="success" />
                     ) : (
                       <UnpublishedIcon color="action" />
                     )}
-                  </Typography>
+                    </div>
 
                   <AttachEmailRoundedIcon sx={{margin:'auto'}}/>
                   <Typography>{post.email}</Typography>
@@ -132,9 +137,9 @@ class NewShow extends React.Component {
         }
         </div>
         
-        <PageNum count={pagesCount} changeHandler={this.changeHandler} />
+        {/* <PageNum count={pagesCount} changeHandler={this.changeHandler} /> */}
       </div>
     );
   }
 }
-export default NewShow;
+export default withRouter(NewShow);
