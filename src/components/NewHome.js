@@ -4,21 +4,25 @@ import NewShow from "./NewShow";
 import { Button, TextField } from "@mui/material";
 import Sorting from "./Sorting";
 import Filter from "./Filter";
+import PageNum from "./PageNum";
 //import GoogleAuth from "./GoogleAuth";
 
 function NewHome() {
   const [users, setUsers] = useState([]);
   const [output, setOutput] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-
+  const [pag,setPag] = useState(1)
+  const [page,setPage] = useState(1)
+  const [pagesCount ,setPagesCount] = useState(10)
+  
   useEffect(() => {
     axios
       .get("https://gorest.co.in/public/v2/users", {
         headers: {
           Authorizaton:
-            "Bearer bf0f401f79f16bfff0c3dd99cc7d2395f41b613717f92226522562487ceff6bf",
+            "Bearer 0ee057fd533ccad974e9383af8209a2e3db05bf7db963840f9c9b68f2c09f4f2",
         },
-        params: { page: 7 },
+        params: { page: 10 },
       })
       .then((response) => {
         setUsers(response.data);
@@ -28,11 +32,18 @@ function NewHome() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [pag]);
 
   function handleChange(e) {
     setSearchTerm(e.target.value);
   }
+
+  const changePageHandler = (arg) => {
+    setPag(arg)
+  }
+  // const handlePage = () =>{
+  //     setPag(pag+1)
+  // }
 
   useEffect(() => {
     setOutput([
@@ -58,6 +69,8 @@ function NewHome() {
         onChange={handleChange}
       />
 
+      {/* <Button variant="contained" onClick={handlePage}>Change page</Button> */}
+
       <br />
       <div style={{display:'flex',flexDirection:'row',justifyContent:'space-evenly',marginBottom:5,margin:20}}>
       <Sorting users={users} setOutput={setOutput}/>
@@ -66,7 +79,7 @@ function NewHome() {
       
       <NewShow output={output} setOutput={setOutput} />
       
-      
+      <PageNum count={pagesCount} changeHandler={changePageHandler} />
     </div>
   );
 }
