@@ -2,11 +2,27 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { Button, CardActions, CardContent, Card ,Box} from "@mui/material";
+import { makeStyles } from '@mui/styles';
 import "./Style.css";
+
+
+const useStyles = makeStyles({
+  c1 :{
+    width: 500,
+    marginLeft: 430,
+    marginTop: 9,
+   
+  },
+})
+
 function UserDetails() {
+
+  const classes = useStyles();
   const { id } = useParams();
   const [userData, setUserData] = useState([]);
   const nav = useNavigate();
+
+
   useEffect(() => {
     axios
       .get(`https://gorest.co.in/public/v2/users/${id}`, {
@@ -30,16 +46,10 @@ function UserDetails() {
   return (
     <div className="divfortext">
       UserDetails
-      <Card
-        sx={{
-          width: 500,
-          height: 285,
-          ml: 50,
-          mt: 2,
-          backgroundColor: "blanchedalmond",
-        }}
+      <Card className={classes.c1}
+      sx={{backgroundColor:"blanchedalmond"}}
       >
-        <CardContent >
+        <CardContent>
           <div >
           <Box sx={{display:'grid',alignItems:'flex-start',justifyContent:'flex-start'}}>
             <p>Name:{name}</p>

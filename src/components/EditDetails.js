@@ -21,6 +21,9 @@ function EditDetails() {
   const [ugender, setUgender] = useState("");
   const [open, setOpen] = useState(false);
 
+  const [vname,setVname] = useState("")
+  const [vmail,setVmail] = useState("")
+
   useEffect(() => {
     axios
       .get(`https://gorest.co.in/public/v2/users/${id}`, {
@@ -67,29 +70,24 @@ function EditDetails() {
       });
     setOpen(true);
 
-    // axios({
-    //   url:`https://gorest.co.in/public/v2/users/${id}`,
-    //   method: "PUT",
-    //   //data: {},
-    //   //data: { name: { uname }, mail: { umail } ,status:"active"},
-    //   headers: {
-    //     Authorization:
-    //       "Bearer 0ee057fd533ccad974e9383af8209a2e3db05bf7db963840f9c9b68f2c09f4f2",
-    //   },
-    //   params :{ data:{uname,umail,active}}
-    // })
-    //   .then((response) => {
-    //     console.log(response.data);
-    //   })
-    //   .catch((errr) => {
-    //     console.log(errr);
-    //   });
-    //   setOpen(true)
-  }
+    }
 
   function handleClose() {
     setOpen(false);
     nav("/");
+  }
+
+
+  const handleEditName = (e) =>{
+    
+      setUname(e.target.value)
+      setVname((/^[a-zA-Z+$]/.test(e.target.value))? "":" Name should be characters only ")
+      
+  }
+
+  const handleEditMail = (e) =>{
+    setUmail(e.target.value)
+    setVmail((/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(e.target.value))? "":"provide a valid  email")
   }
 
   const nav = useNavigate();
@@ -104,22 +102,20 @@ function EditDetails() {
           <TextField
             sx={{ width: 360 }}
             value={uname}
-            onChange={(e) => {
-              setUname(e.target.value);
-            }}
+            onChange={handleEditName}
           ></TextField>
+          <p>{vname}</p>
         </FormLabel>
         <FormLabel>
           email:
           <TextField
             sx={{ width: 360 }}
             value={umail}
-            onChange={(e) => {
-              setUmail(e.target.value);
-            }}
+            onChange={handleEditMail}
           >
             email:
           </TextField>
+          <p>{vmail}</p>
         </FormLabel>
         <FormLabel>
           Select a gender :
