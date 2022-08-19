@@ -5,6 +5,8 @@ import { Button, TextField } from "@mui/material";
 import Sorting from "./Sorting";
 import Filter from "./Filter";
 import PageNum from "./PageNum";
+import FilterUsingApi from "./FilterUsingApi";
+
 //import GoogleAuth from "./GoogleAuth";
 
 function NewHome() {
@@ -22,7 +24,7 @@ function NewHome() {
           Authorizaton:
             "Bearer 0ee057fd533ccad974e9383af8209a2e3db05bf7db963840f9c9b68f2c09f4f2",
         },
-        params: { page: page },
+        params: { page: page ,},
       })
       .then((response) => {
         setUsers(response.data);
@@ -74,7 +76,8 @@ function NewHome() {
       <br />
       <div style={{display:'flex',flexDirection:'row',justifyContent:'space-evenly',marginBottom:5,margin:20}}>
       <Sorting users={users} setOutput={setOutput}/>
-      <Filter users={users} setOutput={setOutput}/>
+      {/* <Filter users={users} setOutput={setOutput}/> */}
+      <FilterUsingApi setOutput={setOutput}/>
       </div>
       
       <NewShow output={output} setOutput={setOutput} />
