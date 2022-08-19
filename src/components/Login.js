@@ -4,10 +4,16 @@ import React from "react";
 const clientId =
   "1026215373024-lrtcnlbuc281nm472vph3fvuovhnfa6q.apps.googleusercontent.com";
 
-function Login() {
+function Login({setAction}) {
+
+
+    
 
     const onSuccess = (res) =>{
-        console.log('Login Success!!!',res.profileObj)
+      
+    localStorage.setItem("token",res.accessToken)
+        setAction(false)
+        console.log('Login Success!!!',res)
     }
 
     const onFailure = (res) =>{
@@ -18,7 +24,7 @@ function Login() {
     <div id="signInButton">
       <GoogleLogin
         clientId={clientId}
-        buttonText="Login"
+        buttonText="Login with Google"
         onSuccess={onSuccess}
         onFailure={onFailure}
         cookiePolicy={"single_host_origin"}

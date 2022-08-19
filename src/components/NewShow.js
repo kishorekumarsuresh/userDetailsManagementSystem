@@ -17,7 +17,7 @@ import PageNum from "./PageNum";
 import AttachEmailRoundedIcon from "@mui/icons-material/AttachEmailRounded";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import UnpublishedIcon from "@mui/icons-material/Unpublished";
-//import  { withRouter } from 'react-router-dom'
+import  { withRouter  } from 'react-router-dom'
 
 class NewShow extends React.Component {
   constructor(props) {
@@ -109,9 +109,11 @@ class NewShow extends React.Component {
                       <UnpublishedIcon color="action" />
                     )}
                     </div>
-
-                  <AttachEmailRoundedIcon sx={{margin:'auto'}}/>
-                  <Typography>{post.email}</Typography>
+                      <div>
+                      <AttachEmailRoundedIcon sx={{margin:'auto'}}/>
+                      <Typography>{post.email}</Typography>
+                      </div>
+                  
                 </CardContent>
 
                 <CardActions sx={{display:'flex',justifyContent:'center',alignItems:'center'}}>

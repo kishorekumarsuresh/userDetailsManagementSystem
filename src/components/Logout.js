@@ -4,9 +4,14 @@ import React from "react";
 const clientId =
   "1026215373024-lrtcnlbuc281nm472vph3fvuovhnfa6q.apps.googleusercontent.com";
 
-function Logout() {
+function Logout({setAction}) {
+
+
+    
 
     const onSuccess = () =>{
+        localStorage.removeItem("token")
+        setAction(true)
         console.log("Log out Successfull")
     }
     return (

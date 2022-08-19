@@ -33,21 +33,26 @@ function UserDetails() {
       <Card
         sx={{
           width: 500,
-          height: 255,
+          height: 285,
           ml: 50,
           mt: 2,
           backgroundColor: "blanchedalmond",
         }}
       >
-        <CardContent sx={{display:'flex',justifyContent:'start'}}>
-          <div styles={{textAlign:'initial'}}>
+        <CardContent >
+          <div >
+          <Box sx={{display:'grid',alignItems:'flex-start',justifyContent:'flex-start'}}>
             <p>Name:{name}</p>
-            <Box sx={{ml:12}}>
-            <p>email:{email}</p>
-            </Box>
+          {/* </Box> */}
+          {/* <Box sx={{marginLeft:-6}}> */}
+          <p>email:{email}</p>
+          {/* </Box> */}
+          {/* <Box sx={{marginRight:27}}> */}
+          <p>gender:{gender}</p>
+          <p>status:{status}</p>
+          </Box>
             
-            <p>gender:{gender}</p>
-            <p>status:{status}</p>
+            
           </div>
         </CardContent>
         <CardActions>

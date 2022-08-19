@@ -17,12 +17,40 @@ class Create extends Component {
       email: "",
       gender: "",
       status: "active",
-      open: false
+      open: false,
+      validity :{
+        name: "",
+      email: "",
+         
+
+      }
     }
   }
    changeValue = (e) => {
 
-    this.setState({ [e.target.name]: e.target.value })
+    const {name , value} = e.target
+     let validity = {...this.state.validity}
+
+     switch(name){
+      case "name":
+        validity.name =  (/^[a-zA-Z+$]/.test(value))? "":" Name should be characters only "
+      break
+
+      case "email":
+        validity.email = (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(value))? "":"provide a valid  email"
+      break
+
+      default : break
+
+
+     }
+
+
+
+    this.setState({ 
+      validity,
+      [name] : value 
+     });
   }
 
   handleButton = (e) => {
@@ -80,6 +108,7 @@ class Create extends Component {
             value={this.state.name}
             onChange={this.changeValue}
             variant='outlined' />
+            <p style={{color:'red'}}>{this.state.validity.name}</p>
 
           <Typography sx={{ mr: 55, mb: 1, mt: 1 }} variant='body1'>Email-id</Typography>
           <TextField label='Enter your email-id'
@@ -88,6 +117,7 @@ class Create extends Component {
             value={this.state.email}
             onChange={this.changeValue}
             variant='outlined' />
+            <p  style={{color:'red'}}>{this.state.validity.email}</p>
           <Typography sx={{ mr: 45, mt: 1 }} variant='body1'>Select your Gender</Typography>
           <RadioGroup
             row

@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{useEffect, useState} from 'react'
 import Login from "./Login";
 import Logout from "./Logout";
 import {gapi} from 'gapi-script'
@@ -10,6 +10,7 @@ const clientId =
 
 function GoogleAuth() {
 
+    const [ action , setAction ] = useState(true)
 
     useEffect(()=>{
         function start(){
@@ -25,9 +26,11 @@ function GoogleAuth() {
     })
   return (
     <Box sx={{display:'flex',flexDirection:'row',justifyContent:'space-between',marginRight:0,}}>
-      <Login />
-      <p> </p>
-      <Logout />
+
+      {action ? <Login setAction={setAction}/> : <Logout setAction={setAction}/>}
+      
+      
+      
     </Box>
   )
 }
